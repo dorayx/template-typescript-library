@@ -1,7 +1,13 @@
-# _opinionated_ Vite-TypeScript Template
+# _opinionated_ TypeScript Library Template
 
 This template is opinionated, and it is not meant to be a one-size-fits-all solution.
 It is meant to be a starting point for my personal projects to bootstrap development, as I like to create minimal viable products from time to time.
+
+## User Cases
+
+- ❌ TypeScript Application _(use [dorayx/template-typescript-app](https://github.com/dorayx/template-typescript-app) instead)_
+- ✅ TypeScript Library
+- ❌ UI Component Library
 
 ## Features
 
@@ -13,12 +19,6 @@ It is meant to be a starting point for my personal projects to bootstrap develop
 - ✅ GitHub Actions
 - ❌ Monorepo
 
-**Use Cases**
-
-- ✅ TypeScript Application
-- ❌ TypeScript Library
-- ❌ UI Component Library
-
 ## Tooling
 
 This template is configured with the following tools:
@@ -26,20 +26,21 @@ This template is configured with the following tools:
 **Compiler & Bundler**
 
 - [TypeScript](https://www.typescriptlang.org/) _(v5)_
-- [Vite](https://vitejs.dev/) _(v4)_
-  - Plugin: [vite-tsconfig-paths](https://www.npmjs.com/package/vite-tsconfig-paths)
-  - Plugin: [vite-plugin-dts](https://www.npmjs.com/package/vite-plugin-dts)
+- [ts-patch](https://github.com/nonara/ts-patch): Patch typescript to allow custom transformers (plugins) during build
+  - [typescript-transform-paths](https://github.com/LeDDGroup/typescript-transform-paths): Transform compiled source module resolution paths using TypeScript's paths config
 
 **Package Manager**
 
 - [Yarn](https://yarnpkg.com/) _(v3)_
-  - Doc: [Zero-installs](https://www.npmjs.com/package/vite-tsconfig-paths)
+  - Doc: [Zero-installs](https://yarnpkg.com/features/caching#zero-installs)
 
 **Testing**
 
+- [Vite](https://vitejs.dev/) _(v4)_
+  - Plugin: [vite-tsconfig-paths](https://www.npmjs.com/package/vite-tsconfig-paths)
 - [Vitest](https://vitest.dev/)
-  - Convention: Unit tests for user cases are stored in the `tests/units` directory.
-  - Convention: Unit tests for individual functions are placed alongside their respective implementations ([In-source testing](https://vitest.dev/guide/in-source.html))
+  - Convention: Unit tests for user cases are stored in the `tests/units` directory
+  - Convention: Unit tests for individual functions are placed in `*.test.ts` files alongside their respective source files
   - Convention: The file `tests/setup.ts` is executed before each test file
   - Convention: The `tests/tsconfig.json` file configures TypeScript for testing
 - GitHub Action: `.github/workflows/test.yml`
@@ -54,11 +55,11 @@ This template is configured with the following tools:
 
 **Code Generator**
 
-- [Plop](https://plopjs.com/)
+- [Plop](https://plopjs.com/): A micro-generator framework that makes it easy for an entire team to create files with a level of uniformity
 
 **Publish**
 
-- [semantic-release](https://semantic-release.gitbook.io/)
+- [semantic-release](https://semantic-release.gitbook.io/): Fully automated version management and package publishing
   - GitHub Action: `.github/workflows/release-package.yml`
   - Env Variables: `NPM_TOKEN` is required to publish a package to the npm registry
   - Additional Plugin: [semantic-release-yarn](https://github.com/hongaar/semantic-release-yarn)

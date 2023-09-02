@@ -1,11 +1,11 @@
 {
-  "name": "@dillage/template-typescript-app",
+  "name": "@dillage/template-typescript-library",
   "version": "0.0.0",
   "author": "Doray <open@doray.dev>",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dorayx/template-typescript-app.git"
+    "url": "https://github.com/dorayx/template-typescript-library.git"
   },
   "files": [
     "dist"
@@ -18,14 +18,14 @@
       "require": "./dist/lib.umd.cjs"
     }
   },
-  "//1": "Due to yarn2+, we have to use 'postinstall' script to install husky",
+  "//1": "Due to yarn2+, we have to use 'postinstall' script to patch tsc and install husky",
   "scripts": {
-    "build": "tsc && vite build",
+    "build": "tspc -p tsconfig.build.json",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "test": "vitest run",
     "test:dev": "vitest dev",
     "coverage": "vitest run --coverage",
-    "postinstall": "is-ci || husky install",
+    "postinstall": "ts-patch install -s && (is-ci || husky install)",
     "plop": "plop",
     "semantic-release": "semantic-release"
   },
@@ -46,9 +46,10 @@
     "prettier": "3.0.2",
     "semantic-release": "^21.1.1",
     "semantic-release-yarn": "^2.0.1",
+    "ts-patch": "^3.0.2",
     "typescript": "~5.1.0",
+    "typescript-transform-paths": "^3.4.6",
     "vite": "^4.4.5",
-    "vite-plugin-dts": "^3.5.3",
     "vite-tsconfig-paths": "^4.2.0",
     "vitest": "^0.34.3"
   },

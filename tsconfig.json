@@ -4,12 +4,11 @@
     "target": "ES2020",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "useDefineForClassFields": true,
 
     // Type-checking and declaration options
     "skipLibCheck": true,
-    "types": ["vitest/importMeta"],
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -21,11 +20,18 @@
       "@/*": ["./src/*"]
     },
     "resolveJsonModule": true,
-    "allowImportingTsExtensions": true,
 
     // Emitting and isolating modules
     "isolatedModules": true,
-    "noEmit": true
+    "noEmit": true,
+
+    // ts-patch settings
+    "plugins": [
+      // Transform paths in output .js files
+      { "transform": "typescript-transform-paths" },
+      // Transform paths in output .d.ts files (Include this line if you output declarations files)
+      { "transform": "typescript-transform-paths", "afterDeclarations": true }
+    ]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
